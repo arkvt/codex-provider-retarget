@@ -1,0 +1,30 @@
+[package]
+name = "codex-provider-retarget"
+version = "0.1.0"
+edition = "2024"
+description = "Terminal UI that retargets local Codex history sessions to the active model provider."
+license = "MIT"
+default-run = "codex-retarget"
+
+[[bin]]
+name = "codex-retarget"
+path = "src/main.rs"
+
+[dependencies]
+# `crossterm` is used through `ratatui::crossterm` so that both crates always
+# agree on the same version.
+ratatui = "0.30"
+rusqlite = { version = "0.40", features = ["bundled"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+chrono = "0.4"
+sysinfo = "0.39"
+
+[dev-dependencies]
+tempfile = "3"
+
+[profile.release]
+opt-level = "z"
+lto = true
+strip = true
